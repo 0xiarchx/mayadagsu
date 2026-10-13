@@ -29,7 +29,7 @@
         "alternateName": "Güneş Su",
         "description": "Bahçeşehir, Esenkent ve Boğazköy bölgesine Mayadağ Doğal Kaynak Suyu dağıtımı.",
         "image": "https://mayadagsu.pages.dev/images/mayadag-urunler.jpeg",
-        "telephone": "+905389181553",
+        "telephone": ["+905389181553", "+902126729132"],
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "Yeşilırmak Sokak",
@@ -40,7 +40,7 @@
         },
         "geo": {"@type": "GeoCoordinates", "latitude": 41.0575, "longitude": 28.6825},
         "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "09:00", "closes": "19:00"}],
-        "areaServed": [{"@type": "City", "name": "Bahçeşehir"}, {"@type": "City", "name": "Esenkent"}, {"@type": "City", "name": "Boğazköy"}],
+        "areaServed": [{"@type": "City", "name": "Bahçeşehir"}, {"@type": "City", "name": "Esenkent"}, {"@type": "City", "name": "Boğazköy"}, {"@type": "City", "name": "Orhangazi Mahallesi"}],
         "url": "https://mayadagsu.pages.dev/"
     }
     </script>
@@ -319,25 +319,100 @@
         .trust-item { display: flex; align-items: center; gap: 6px; }
         .trust-item svg { width: 16px; height: 16px; }
 
-        /* STATS */
-        .stats-bar { padding: 0 16px; margin-top: -30px; position: relative; z-index: 2; }
+        /* HIGHLIGHTS BAR */
+        .highlights-bar { padding: 0 16px; margin-top: -30px; position: relative; z-index: 2; }
 
-        .stats-inner {
-            max-width: 900px;
+        .highlights-inner {
+            max-width: 1000px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            background: var(--surface);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-xl);
-            border: 1px solid var(--border);
-            overflow: hidden;
+            gap: 14px;
         }
 
-        .stat-item { padding: 22px 16px; text-align: center; border-right: 1px solid var(--border); }
-        .stat-item:last-child { border-right: none; }
-        .stat-number { font-size: 1.6rem; font-weight: 900; color: var(--primary); line-height: 1; }
-        .stat-label { font-size: 0.78rem; color: var(--text-sec); margin-top: 4px; font-weight: 500; }
+        .highlight-card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 24px 16px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: highlightIn 0.6s ease forwards;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .highlight-card:nth-child(1) { animation-delay: 0.1s; }
+        .highlight-card:nth-child(2) { animation-delay: 0.25s; }
+        .highlight-card:nth-child(3) { animation-delay: 0.4s; }
+        .highlight-card:nth-child(4) { animation-delay: 0.55s; }
+
+        .highlight-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-xl); }
+
+        @keyframes highlightIn { to { opacity: 1; transform: translateY(0); } }
+
+        .highlight-icon {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 10px;
+        }
+
+        .hi-blue { background: linear-gradient(135deg, #dbeafe, #bfdbfe); }
+        .hi-green { background: linear-gradient(135deg, #dcfce7, #bbf7d0); }
+        .hi-orange { background: linear-gradient(135deg, #ffedd5, #fed7aa); }
+        .hi-purple { background: linear-gradient(135deg, #ede9fe, #ddd6fe); }
+
+        .highlight-icon svg { width: 22px; height: 22px; }
+        .highlight-card h3 { font-size: 0.92rem; font-weight: 700; margin-bottom: 4px; color: var(--text); }
+        .highlight-card p { font-size: 0.78rem; color: var(--text-sec); line-height: 1.4; }
+
+        /* PRODUCT CALL BUTTON */
+        .product-call {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            width: 100%;
+            padding: 10px;
+            background: var(--surface);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            font-family: inherit;
+            transition: all 0.2s;
+            margin-top: 8px;
+        }
+
+        .product-call:hover { background: var(--primary-light); transform: scale(1.02); }
+        .product-call svg { width: 16px; height: 16px; }
+
+        /* CTA CALL BUTTON */
+        .btn-call-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.4);
+            backdrop-filter: blur(8px);
+            transition: all 0.25s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-call-outline:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
+        .btn-call-outline svg { width: 20px; height: 20px; }
 
         /* SECTIONS */
         section { padding: 64px 16px; }
@@ -845,8 +920,7 @@
             .hero .tagline { font-size: 1rem; }
             .btn { padding: 14px 24px; font-size: 0.95rem; }
 
-            .stats-inner { grid-template-columns: repeat(2, 1fr); }
-            .stat-item:nth-child(2) { border-right: none; }
+            .highlights-inner { grid-template-columns: repeat(2, 1fr); }
 
             .section-title h2 { font-size: 1.45rem; }
             section { padding: 48px 16px; }
@@ -875,7 +949,7 @@
 
 <!-- PROMO BAR -->
 <div class="promo-bar">
-    <span>Bahçeşehir, Esenkent ve Boğazköy'e &#x2728; &#220;CRETSİZ TESLİMAT &#x2728; Hemen sipariş verin!</span>
+    <span>Bahçeşehir, Esenkent ve Boğazköy'e &#x2728; &#220;CRETSİZ TESLİMAT &#x2728; Farklı marka damacana değişimi &#220;CRETSİZ! Hemen sipariş verin!</span>
 </div>
 
 <!-- HEADER -->
@@ -960,67 +1034,39 @@
     </div>
 </section>
 
-<!-- STATS -->
-<div class="stats-bar">
-    <div class="stats-inner">
-        <div class="stat-item">
-            <div class="stat-number" data-count="19">0</div>
-            <div class="stat-label">Litre Damacana</div>
+<!-- HIGHLIGHTS -->
+<div class="highlights-bar">
+    <div class="highlights-inner">
+        <div class="highlight-card">
+            <div class="highlight-icon hi-blue">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+            </div>
+            <h3>%100 Doğal Kaynak</h3>
+            <p>Mayadağ'ın derinliklerinden gelen saf ve mineralli su</p>
         </div>
-        <div class="stat-item">
-            <div class="stat-number" data-count="3">0</div>
-            <div class="stat-label">Hizmet Bölgesi</div>
+        <div class="highlight-card">
+            <div class="highlight-icon hi-green">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h3>Dakikalar İçinde</h3>
+            <p>Sipariş verin, suyunuz hemen kapınıza gelsin</p>
         </div>
-        <div class="stat-item">
-            <div class="stat-number" data-count="6">0</div>
-            <div class="stat-label">Gün Açık</div>
+        <div class="highlight-card">
+            <div class="highlight-icon hi-orange">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Hijyenik Teslimat</h3>
+            <p>Tüm ürünler steril koşullarda kapınıza teslim edilir</p>
         </div>
-        <div class="stat-item">
-            <div class="stat-number" style="font-size:1.2rem;">&#9889; Hızlı</div>
-            <div class="stat-label">Teslimat</div>
+        <div class="highlight-card">
+            <div class="highlight-icon hi-purple">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h3>Ücretsiz Değişim</h3>
+            <p>Farklı marka damacana değişimi tamamen ücretsiz!</p>
         </div>
     </div>
 </div>
-
-<!-- FEATURES -->
-<section class="features" id="neden-biz">
-    <div class="container">
-        <div class="section-title">
-            <h2>Neden <span class="accent">Güneş Su</span>?</h2>
-            <p>Bahçeşehir bölgesinde yıllardır güvenilen su dağıtım hizmeti</p>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card fade-up">
-                <div class="feature-icon fi-blue">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
-                </div>
-                <h3>Doğal Kaynak Suyu</h3>
-                <p>Mayadağ'ın saf ve doğal kaynak suyu ile ailenizin sağlığı güvende</p>
-            </div>
-            <div class="feature-card fade-up">
-                <div class="feature-icon fi-green">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                </div>
-                <h3>Şimşek Hızında Teslimat</h3>
-                <p>Aradığınızda dakikalar içinde kapınıza teslim, beklemek yok!</p>
-            </div>
-            <div class="feature-card fade-up">
-                <div class="feature-icon fi-orange">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                </div>
-                <h3>Hijyenik &amp; Güvenli</h3>
-                <p>Tüm ürünlerimiz hijyen standartlarına uygun şekilde teslim edilir</p>
-            </div>
-            <div class="feature-card fade-up">
-                <div class="feature-icon fi-purple">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-                </div>
-                <h3>Ücretsiz Teslimat</h3>
-                <p>Bahçeşehir, Esenkent ve Boğazköy'e teslimat tamamen ücretsiz!</p>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- CTA BANNER 1 -->
 <div class="cta-banner">
@@ -1051,22 +1097,28 @@
                     <div class="product-tags">
                         <span class="product-tag">19 Litre</span>
                         <span class="product-tag">Damacana</span>
+                        <span class="product-tag" style="background:#dcfce7;color:#16a34a;">Farklı Marka Değişim Ücretsiz</span>
                     </div>
                     <a href="https://wa.me/905389181553?text=Merhaba%2C%2019L%20damacana%20su%20sipari%C5%9Fi%20vermek%20istiyorum" class="product-order" target="_blank" rel="noopener">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                         Sipariş Ver
+                    </a>
+                    <a href="tel:+905389181553" class="product-call">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        Telefonla Ara
                     </a>
                 </div>
             </div>
 
             <div class="product-card fade-up">
                 <div class="product-visual pv-pet">
-                    <img src="images/mayadag-urunler.jpeg" alt="Mayadağ Pet Şişe Su Çeşitleri - 0.5L 1.5L 5L" class="product-img" loading="lazy" width="400" height="200" style="object-position: center 65%;">
+                    <img src="images/pet-sise-su.jpg" alt="Mayadağ Pet Şişe Su Çeşitleri - 0.33L 0.5L 1.5L 5L" class="product-img" loading="lazy" width="400" height="200" style="object-fit: contain; padding: 16px;">
                 </div>
                 <div class="product-info">
                     <h3>Pet Şişe Su</h3>
                     <p>Her boyutta pratik pet şişe. Paket halinde sipariş verin, stoksuz kalmayın!</p>
                     <div class="product-tags">
+                        <span class="product-tag">0.33L</span>
                         <span class="product-tag">0.5L</span>
                         <span class="product-tag">1.5L</span>
                         <span class="product-tag">5L</span>
@@ -1075,23 +1127,31 @@
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                         Sipariş Ver
                     </a>
+                    <a href="tel:+905389181553" class="product-call">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        Telefonla Ara
+                    </a>
                 </div>
             </div>
 
             <div class="product-card fade-up">
                 <div class="product-visual pv-bardak">
-                    <img src="images/bardak-su.jpg" alt="Bardak Su - 200ml 330ml Toplantı ve Organizasyon Suyu" class="product-img" loading="lazy" width="400" height="200">
+                    <img src="images/bardak-su.jpg" alt="Bardak Su - 200ml 300ml Toplantı ve Organizasyon Suyu" class="product-img" loading="lazy" width="400" height="200">
                 </div>
                 <div class="product-info">
                     <h3>Bardak Su</h3>
                     <p>Toplantı, düğün ve organizasyonlarınız için pratik bardak su çeşitleri.</p>
                     <div class="product-tags">
                         <span class="product-tag">200ml</span>
-                        <span class="product-tag">330ml</span>
+                        <span class="product-tag">300ml</span>
                     </div>
                     <a href="https://wa.me/905389181553?text=Merhaba%2C%20bardak%20su%20sipari%C5%9Fi%20vermek%20istiyorum" class="product-order" target="_blank" rel="noopener">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                         Sipariş Ver
+                    </a>
+                    <a href="tel:+905389181553" class="product-call">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        Telefonla Ara
                     </a>
                 </div>
             </div>
@@ -1110,6 +1170,10 @@
                     <a href="https://wa.me/905389181553?text=Merhaba%2C%20t%C3%BCp%20sipari%C5%9Fi%20vermek%20istiyorum" class="product-order" target="_blank" rel="noopener">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                         Sipariş Ver
+                    </a>
+                    <a href="tel:+905389181553" class="product-call">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        Telefonla Ara
                     </a>
                 </div>
             </div>
@@ -1141,10 +1205,14 @@
                 <p>Dakikalar içinde suyunuz kapınızda!</p>
             </div>
         </div>
-        <div style="text-align:center;">
+        <div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;">
             <a href="https://wa.me/905389181553?text=Merhaba%2C%20su%20sipari%C5%9Fi%20vermek%20istiyorum" class="btn btn-whatsapp" target="_blank" rel="noopener" style="font-size:1.1rem;padding:16px 36px;">
                 <svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                 Hemen Sipariş Ver
+            </a>
+            <a href="tel:+905389181553" class="btn" style="background:var(--surface);color:var(--primary);border:2px solid var(--primary);font-size:1rem;padding:14px 32px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:22px;height:22px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                Telefonla Ara: 0538 918 15 53
             </a>
         </div>
     </div>
@@ -1178,6 +1246,13 @@
                 </div>
                 <h3>Boğazköy</h3>
                 <p>Boğazköy ve çevresine su dağıtımı</p>
+            </div>
+            <div class="coverage-card fade-up">
+                <div class="coverage-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <h3>Orhangazi Mah.</h3>
+                <p>Orhangazi Mahallesi'ne hızlı teslimat</p>
             </div>
         </div>
     </div>
@@ -1251,7 +1326,7 @@
                 <button class="dot" onclick="goToReview(3)" aria-label="Yorum 4"></button>
             </div>
             <div style="text-align:center;margin-top:24px;">
-                <a href="https://search.google.com/local/writereview?placeid=ChIJLwpmkBa5yhQR" target="_blank" rel="noopener" class="btn" style="background:var(--surface);color:var(--text);border:2px solid var(--border);font-size:0.9rem;padding:12px 24px;">
+                <a href="https://maps.app.goo.gl/potb1nMTPKwYwFAv7" target="_blank" rel="noopener" class="btn" style="background:var(--surface);color:var(--text);border:2px solid var(--border);font-size:0.9rem;padding:12px 24px;">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                     Google'da Bizi Değerlendirin
                 </a>
@@ -1268,6 +1343,12 @@
         <svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Acil Sipariş Ver
     </a>
+    <div style="margin-top:14px;position:relative;z-index:1;">
+        <a href="tel:+905389181553" class="btn-call-outline">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Hemen Ara: 0538 918 15 53
+        </a>
+    </div>
 </div>
 
 <!-- PHOTO GALLERY -->
@@ -1312,10 +1393,10 @@
         </div>
         <div class="faq-list">
             <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Bahçeşehir'e damacana su siparişi nasıl verilir?<svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-answer"><div class="faq-answer-inner">WhatsApp üzerinden 0538 918 15 53 numarasına mesaj göndererek veya doğrudan arayarak sipariş verebilirsiniz. Siparişiniz kısa sürede adresinize teslim edilir.</div></div></div>
-            <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Hangi bölgelere su dağıtımı yapıyorsunuz?<svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-answer"><div class="faq-answer-inner">Bahçeşehir, Esenkent ve Boğazköy bölgelerine su dağıtım hizmeti vermekteyiz. Bu bölgelere teslimat ücretsizdir.</div></div></div>
+            <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Hangi bölgelere su dağıtımı yapıyorsunuz?<svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-answer"><div class="faq-answer-inner">Bahçeşehir, Esenkent, Boğazköy ve Orhangazi Mahallesi bölgelerine su dağıtım hizmeti vermekteyiz. Bu bölgelere teslimat ücretsizdir.</div></div></div>
             <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Çalışma saatleriniz nedir?<svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-answer"><div class="faq-answer-inner">Hafta içi ve Cumartesi günleri 09:00 - 19:00 saatleri arasında hizmet vermekteyiz. Pazar günleri kapalıyız.</div></div></div>
             <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Teslimat ücreti var mı?<svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-answer"><div class="faq-answer-inner">Hayır! Hizmet bölgelerimiz olan Bahçeşehir, Esenkent ve Boğazköy'e teslimat tamamen ücretsizdir.</div></div></div>
-            <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Hangi ürünleri sipariş edebilirim?<svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-answer"><div class="faq-answer-inner">19 litre damacana su, 0.5L - 1.5L - 5L pet şişe su, 200ml - 330ml bardak su satışı yapmaktayız. Ayrıca 12 KG ve 24 KG ev tüpü dağıtımı da yapılmaktadır.</div></div></div>
+            <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Hangi ürünleri sipariş edebilirim?<svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-answer"><div class="faq-answer-inner">19 litre damacana su, 0.33L - 0.5L - 1.5L - 5L pet şişe su, 200ml - 300ml bardak su satışı yapmaktayız. Ayrıca 12 KG ve 24 KG ev tüpü dağıtımı da yapılmaktadır.</div></div></div>
         </div>
     </div>
 </section>
@@ -1335,7 +1416,7 @@
                     </div>
                     <div>
                         <div class="label">WhatsApp ile Sipariş</div>
-                        <a href="https://wa.me/905389181553?text=Merhaba%2C%20su%20sipari%C5%9Fi%20vermek%20istiyorum">0538 target="_blank" rel="noopener">0538 918 15 53</a>
+                        <a href="https://wa.me/905389181553?text=Merhaba%2C%20su%20sipari%C5%9Fi%20vermek%20istiyorum" target="_blank" rel="noopener">0538 918 15 53</a>
                     </div>
                 </div>
                 <div class="contact-item">
@@ -1343,8 +1424,17 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                     </div>
                     <div>
-                        <div class="label">Telefon ile Arayın</div>
+                        <div class="label">Cep Telefon</div>
                         <a href="tel:+905389181553">0538 918 15 53</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon ci-blue">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    </div>
+                    <div>
+                        <div class="label">Sabit Hat</div>
+                        <a href="tel:+902126729132">0212 672 91 32</a>
                     </div>
                 </div>
                 <div class="contact-item">
@@ -1396,6 +1486,7 @@
         <div class="footer-col">
             <h4>İletişim</h4>
             <a href="tel:+905389181553">0538 918 15 53</a>
+            <a href="tel:+902126729132">0212 672 91 32</a>
             <a href="https://wa.me/905389181553" target="_blank" rel="noopener">WhatsApp Sipariş</a>
             <a href="https://maps.google.com/?q=Ye%C5%9Fil%C4%B1rmak+Sokak+Esenyurt+34519+Bah%C3%A7e%C5%9Fehir+%C4%B0stanbul" target="_blank" rel="noopener">Haritada Göster</a>
         </div>
@@ -1450,28 +1541,6 @@ var observer = new IntersectionObserver(function(entries) {
 
 document.querySelectorAll('.fade-up').forEach(function(el) { observer.observe(el); });
 
-// Counter animation
-var counted = false;
-var statsObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-        if (entry.isIntersecting && !counted) {
-            counted = true;
-            document.querySelectorAll('[data-count]').forEach(function(el) {
-                var target = parseInt(el.getAttribute('data-count'));
-                var current = 0;
-                var step = Math.max(1, Math.floor(target / 30));
-                var timer = setInterval(function() {
-                    current += step;
-                    if (current >= target) { current = target; clearInterval(timer); }
-                    el.textContent = current;
-                }, 40);
-            });
-        }
-    });
-}, { threshold: 0.5 });
-
-var statsEl = document.querySelector('.stats-inner');
-if (statsEl) statsObserver.observe(statsEl);
 </script>
 
 </body>
